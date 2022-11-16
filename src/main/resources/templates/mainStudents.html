@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts_School</title>
+    <link rel="stylesheet" th:href="@{cssMain.css}" href="/static/cssMain.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{normalize.css}" href="/static/normalize.css" type="text/css" />
+</head>
+
+<body>
+    <div class="wrapperMain">
+        <div class="addSelection">
+            <button class="btn addSelection_btn">Add student</button>
+            <form class="addSection_form" action="#" th:action="@{/mainStudents}" th:object="${student}" method="POST">
+                <label>
+                    <input th:required="required" minlength="4" type="text" th:field="*{name}" placeholder="FullName">
+                </label>
+                <label>
+                    <input th:required="required" type="number" th:field="*{age}" placeholder="Age, from 18">
+                </label>
+                <label>
+                    <select name="type">
+                        <option th:each="NameOfFaculty : ${T(ru.hogwarts.school.entity.NameOfFaculty).values()}"
+                            th:value="${NameOfFaculty.getType()}" th:text="${NameOfFaculty.type}"></option>
+                    </select>
+                </label>
+                <button class="btn" type="submit">Add</button>
+            </form>
+        </div>
+        <div class="tableSection">
+            <div>All Students</div>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Faculty</th>
+                </tr>
+                <tr th:each="students:${students}">
+                    <th th:text="${students.getId()}"></th>
+                    <th th:text="${students.getName()}"></th>
+                    <th th:text="${students.getAge()}"></th>
+                    <th th:text="${students.getFaculty().getName()}"></th>
+                    <td>
+                        <a class="processWithElem_btn"
+                            th:href="@{mainStudents/deleteStudent/{id}(id=${students.getId()})}">Delete</a>
+                        <a class="processWithElem_btn"
+                            th:href="@{mainStudents/updateStudent/{id}(id=${students.getId()})}">Update</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="filterSection">
+            <form th:action="@{/mainStudents}" method="GET">
+                <label>
+                    <input type="text" placeholder="28" th:name="age">
+                </label>
+                <button class="btn" type="submit">Get student with age</button>
+            </form>
+            <form th:action="@{/mainStudents}" method="GET">
+                <label>
+                    <input type="text" placeholder="20" th:name="from">
+                </label>
+                <label>
+                    <input type="text" placeholder="50" th:name="to">
+                </label>
+                <button class="btn" type="submit">Get student with between age</button>
+            </form>
+            <a th:href="@{/mainStudents}">
+                <button class="btn">Return All</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        var addButton = document.querySelector(".addSelection_btn"),
+            addForm = document.querySelector(".addSection_form");
+        addButton.addEventListener("click", function () {
+            addForm.classList.toggle("openForm")
+            if (addButton.innerHTML === "Add student") {
+                addButton.innerHTML = "Close window";
+            } else {
+                addButton.innerHTML = "Add student";
+            }
+        });
+    </script>
+</body>
+
+
+
+</html>

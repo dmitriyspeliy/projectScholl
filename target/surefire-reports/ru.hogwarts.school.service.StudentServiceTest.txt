@@ -1,0 +1,58 @@
+-------------------------------------------------------------------------------
+Test set: ru.hogwarts.school.service.StudentServiceTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 3, Errors: 1, Skipped: 0, Time elapsed: 0.089 s <<< FAILURE! - in ru.hogwarts.school.service.StudentServiceTest
+findStudentByIDPositive  Time elapsed: 0.051 s  <<< ERROR!
+org.mockito.exceptions.misusing.PotentialStubbingProblem: 
+
+Strict stubbing argument mismatch. Please check:
+ - this invocation of 'findById' method:
+    studentRepository.findById(1L);
+    -> at ru.hogwarts.school.service.StudentService.findStudentByID(StudentService.java:36)
+ - has following stubbing(s) with different arguments:
+    1. studentRepository.findById(null);
+      -> at ru.hogwarts.school.service.StudentServiceTest.findStudentByIDPositive(StudentServiceTest.java:56)
+Typically, stubbing argument mismatch indicates user mistake when writing tests.
+Mockito fails early so that you can debug potential problem easily.
+However, there are legit scenarios when this exception generates false negative signal:
+  - stubbing the same method multiple times using 'given().will()' or 'when().then()' API
+    Please use 'will().given()' or 'doReturn().when()' API for stubbing.
+  - stubbed method is intentionally invoked with different arguments by code under test
+    Please use default or 'silent' JUnit Rule (equivalent of Strictness.LENIENT).
+For more information see javadoc for PotentialStubbingProblem class.
+	at ru.hogwarts.school.service.StudentServiceTest.findStudentByIDPositive(StudentServiceTest.java:60)
+
+updateStudentPositive  Time elapsed: 0.01 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting
+  StudentRecord(id=null, name=null, age=0, faculty_id=null, faculty=null)
+to have a property or a field named "name" with value
+  "testUp"
+but value was:
+  null
+(static and synthetic fields are ignored)
+	at ru.hogwarts.school.service.StudentServiceTest.updateStudentPositive(StudentServiceTest.java:78)
+
+findStudentByAgeBetween  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting actual:
+  []
+to contain at least one of the following elements:
+  [19, 20, 21]
+but none were found 
+	at ru.hogwarts.school.service.StudentServiceTest.findStudentByAgeBetween(StudentServiceTest.java:137)
+
+getAllStudentsByAge  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting ArrayList:
+  []
+to contain only:
+  [20]
+but could not find the following element(s):
+  [20]
+
+	at ru.hogwarts.school.service.StudentServiceTest.getAllStudentsByAge(StudentServiceTest.java:124)
+

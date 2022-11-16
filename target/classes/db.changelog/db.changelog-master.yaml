@@ -1,0 +1,10 @@
+databaseChangeLog:
+    - changeSet:
+        id: 1
+        author: dmitriy
+    - tagDatabase:
+      tag: 0
+    - include:
+        file: db.changelog/v-1.0/db_changelog-v-1.0.xml
+       
+

@@ -1,0 +1,5 @@
+ru\hogwarts\school\service\FacultyServiceTest.class
+ru\hogwarts\school\SchoolApplicationTests.class
+ru\hogwarts\school\SchoolApplicationWithMockTest.class
+ru\hogwarts\school\service\StudentServiceTest.class
+ru\hogwarts\school\service\AvatarServiceTest.class

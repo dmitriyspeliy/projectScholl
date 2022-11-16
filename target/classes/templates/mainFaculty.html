@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts_School</title>
+    <link rel="stylesheet" th:href="@{normalize.css}" href="/static/normalize.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{cssMain.css}" href="/static/cssMain.css" type="text/css" />
+</head>
+
+<body>
+    <div class="wrapperMain">
+        <div class="addSelection">
+            <button class="btn addSelection_btn">Add faculty</button>
+            <form class="addSection_form" action="#" th:action="@{/mainFaculties}" th:object="${faculty}" method="POST">
+                <label>
+                    <input th:required="required" minlength="4" type="text" th:field="*{name}"
+                        placeholder="Name of faculty">
+                </label>
+                <label>
+                    <input th:required="required" minlength="4" type="text" th:field="*{color}" placeholder="Color">
+                </label>
+                <button class="btn" type="submit">Add</button>
+            </form>
+        </div>
+        <div class="tableSection">
+            <div>All Faculties</div>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                </tr>
+                <tr th:each="faculty:${faculties}">
+                    <th th:text="${faculty.getId()}"></th>
+                    <th th:text="${faculty.getName()}"></th>
+                    <th th:text="${faculty.getColor()}"></th>
+                    <td>
+                        <a class="processWithElem_btn"
+                            th:href="@{mainFaculties/deleteFaculty/{id}(id=${faculty.getId()})}">Delete</a>
+                        <a class="processWithElem_btn"
+                            th:href="@{mainFaculties/updateFaculty/{id}(id=${faculty.getId()})}">Update</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="filterSection">
+            <form th:action="@{/mainFaculties}" method="GET">
+                <label>
+                    <input type="text" th:name="color" class="findFacultyByColor">
+                </label>
+                <button class="btn" type="submit">Get faculty by color</button>
+            </form>
+            <form th:action="@{/mainFaculties}" method="GET">
+                <label>
+                    <input type="text" th:name="name" class="findFacultyByColor">
+                </label>
+                <button class="btn" type="submit">Get faculty by name</button>
+            </form>
+            <a th:href="@{/mainFaculties}">
+                <button class="btn">Return All</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        var addButton = document.querySelector(".addSelection_btn"),
+            addForm = document.querySelector(".addSection_form");
+        addButton.addEventListener("click", function () {
+            addForm.classList.toggle("openForm")
+            if (addButton.innerHTML === "Add faculty") {
+                addButton.innerHTML = "Close window";
+            } else {
+                addButton.innerHTML = "Add faculty";
+            }
+        });
+    </script>
+</body>
+
+</html>

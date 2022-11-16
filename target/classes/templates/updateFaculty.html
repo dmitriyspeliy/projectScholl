@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitySight</title>
+    <link rel="stylesheet" th:href="@{/normalize.css}" href="/static/normalize.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/cssMain.css}" href="/static/cssMain.css" type="text/css" />
+</head>
+
+<body>
+
+    <div class="wrapperMain">
+
+        <form th:method="post" class="updateForm" th:object="${updateFaculty}"
+            th:action="@{/mainFaculties/updateAndSaveFaculty/{id}(id=${updateFaculty.getId()})}">
+
+            <div class="descBefore">Until change</div>
+            <br>
+            <label>
+                <input readonly th:required="required" minlength="4" type="text" th:value="${updateFaculty.getName()}"
+                    placeholder="Name of faculty">
+            </label>
+            <label>
+                <input readonly th:required="required" minlength="4" type="text" th:value="${updateFaculty.getColor()}"
+                    placeholder="Color">
+            </label>
+
+            <br>
+            <div class="descAfter">After</div>
+            <br>
+            <label>
+                <input th:required="required" minlength="4" type="text" th:field="*{name}"
+                    placeholder="Name of faculty">
+            </label>
+            <label>
+                <input th:required="required" minlength="4" type="text" th:field="*{color}" placeholder="Color">
+            </label>
+            <button class="btn" type="submit">Save faculty</button>
+        </form>
+        <a th:href="@{/mainFaculties}">
+            <button class="btn">Back to faculty</button>
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitySight</title>
+    <link rel="stylesheet" th:href="@{/normalize.css}" href="/static/normalize.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/cssMain.css}" href="/static/cssMain.css" type="text/css" />
+</head>
+
+<body>
+
+    <div class="wrapperMain">
+
+        <form class="updateForm" th:method="post" th:object="${updateStudent}"
+            th:action="@{/mainStudents/updateAndSaveStudent/{id}(id=${updateStudent.getId()})}">
+            <div class="descBefore">Until change</div>
+            <br>
+            <label>
+                <input readonly th:required="required" minlength="4" type="text" th:value="${updateStudent.getName()}"
+                    placeholder="FullName student">
+            </label>
+            <label>
+                <input readonly th:required="required" type="number" th:value="${updateStudent.getAge()}"
+                    placeholder="Age">
+            </label>
+            <label>
+                <input readonly th:required="required" type="text" th:value="${updateStudent.getFaculty().getName()}">
+            </label>
+            <br>
+            <div class="descAfter">After</div>
+            <br>
+            <label>
+                <input th:required="required" minlength="4" type="text" th:field="*{name}"
+                    placeholder="FullName student">
+            </label>
+            <label>
+                <input th:required="required" type="number" th:field="*{age}" placeholder="Age">
+            </label>
+            <label>
+                <select name="type">
+                    <option th:each="NameOfFaculty : ${T(ru.hogwarts.school.entity.NameOfFaculty).values()}"
+                        th:value="${NameOfFaculty.getType()}" th:text="${NameOfFaculty.type}"></option>
+                </select>
+            </label>
+            <button class="btn">Save update</button>
+        </form>
+        <a th:href="@{/mainStudents}">
+            <button class="btn">Back to student</button>
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>

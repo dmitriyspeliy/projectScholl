@@ -1,0 +1,38 @@
+-------------------------------------------------------------------------------
+Test set: ru.hogwarts.school.service.FacultyServiceTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.01 s <<< FAILURE! - in ru.hogwarts.school.service.FacultyServiceTest
+getFacultiesByNameIgnoreCase  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting actual:
+  []
+to contain at least one of the following elements:
+  ["Griffendor"]
+but none were found 
+	at ru.hogwarts.school.service.FacultyServiceTest.getFacultiesByNameIgnoreCase(FacultyServiceTest.java:138)
+
+getFacultiesByColorIgnoreCase  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting ArrayList:
+  []
+to contain only:
+  ["Red"]
+but could not find the following element(s):
+  ["Red"]
+
+	at ru.hogwarts.school.service.FacultyServiceTest.getFacultiesByColorIgnoreCase(FacultyServiceTest.java:125)
+
+findStudentByFaculty_id  Time elapsed: 0.005 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting ArrayList:
+  []
+to contain only:
+  [1]
+but could not find the following element(s):
+  [1]
+
+	at ru.hogwarts.school.service.FacultyServiceTest.findStudentByFaculty_id(FacultyServiceTest.java:159)
+

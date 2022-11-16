@@ -1,0 +1,57 @@
+-------------------------------------------------------------------------------
+Test set: ru.hogwarts.school.SchoolApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 1, Errors: 4, Skipped: 0, Time elapsed: 11.02 s <<< FAILURE! - in ru.hogwarts.school.SchoolApplicationTests
+testGetAllStudentsWithAge  Time elapsed: 0.116 s  <<< ERROR!
+org.springframework.web.client.RestClientException: 
+Error while extracting response for type [interface java.util.Collection] and content type [application/json]; nested exception is org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`); nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.testGetAllStudentsWithAge(SchoolApplicationTests.java:73)
+Caused by: org.springframework.http.converter.HttpMessageNotReadableException: 
+JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`); nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.testGetAllStudentsWithAge(SchoolApplicationTests.java:73)
+Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: 
+Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.testGetAllStudentsWithAge(SchoolApplicationTests.java:73)
+
+testUpdateStudent  Time elapsed: 0.044 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+expected: 200 OK
+ but was: 500 INTERNAL_SERVER_ERROR
+	at ru.hogwarts.school.SchoolApplicationTests.testUpdateStudent(SchoolApplicationTests.java:89)
+
+testGetAllStudents  Time elapsed: 0.022 s  <<< ERROR!
+org.springframework.web.client.RestClientException: 
+Error while extracting response for type [interface java.util.Collection] and content type [application/json]; nested exception is org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`); nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.testGetAllStudents(SchoolApplicationTests.java:51)
+Caused by: org.springframework.http.converter.HttpMessageNotReadableException: 
+JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`); nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.testGetAllStudents(SchoolApplicationTests.java:51)
+Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: 
+Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.testGetAllStudents(SchoolApplicationTests.java:51)
+
+testDeleteByID  Time elapsed: 0.001 s  <<< ERROR!
+ru.hogwarts.school.exception.ElemNotFound: Нет элемента с id 1
+	at ru.hogwarts.school.SchoolApplicationTests.testDeleteByID(SchoolApplicationTests.java:97)
+
+findStudentByAgeBetween  Time elapsed: 0.039 s  <<< ERROR!
+org.springframework.web.client.RestClientException: 
+Error while extracting response for type [interface java.util.Collection] and content type [application/json]; nested exception is org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`); nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.findStudentByAgeBetween(SchoolApplicationTests.java:116)
+Caused by: org.springframework.http.converter.HttpMessageNotReadableException: 
+JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`); nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.findStudentByAgeBetween(SchoolApplicationTests.java:116)
+Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: 
+Cannot deserialize value of type `java.util.ArrayList<java.lang.Object>` from Object value (token `JsonToken.START_OBJECT`)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]
+	at ru.hogwarts.school.SchoolApplicationTests.findStudentByAgeBetween(SchoolApplicationTests.java:116)
+

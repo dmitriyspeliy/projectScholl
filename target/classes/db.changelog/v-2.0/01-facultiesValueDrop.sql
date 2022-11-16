@@ -1,0 +1,1 @@
+truncate table falcuties cascade
