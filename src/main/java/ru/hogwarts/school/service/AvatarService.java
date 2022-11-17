@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,7 @@ public class AvatarService {
     private final StudentMapper studentMapper;
     private final AvatarMapper avatarMapper;
 
+    Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     public AvatarService(AvatarRepository avatarRepository, StudentService studentService, StudentMapper studentMapper, AvatarMapper avatarMapper) {
         this.avatarRepository = avatarRepository;
@@ -44,6 +47,9 @@ public class AvatarService {
     }
 
     public void uploadAvatar(long id, MultipartFile file) {
+
+        logger.info("Was invoked method for upload Avatar");
+
         StudentRecord studentRecord = studentService.findStudentByID(id);
 
         Path filePath = Path.of(avatarDir
@@ -114,6 +120,8 @@ public class AvatarService {
     }
 
     public Collection<AvatarRecord> getAllAvatarWithPaginator(Integer page, Integer size) {
+        logger.info("Was invoked method that get avatar with paginator");
+
         PageRequest pageRequest = PageRequest.of(page, size);
         return avatarMapper.toRecordList(avatarRepository.findAll(pageRequest).getContent());
     }

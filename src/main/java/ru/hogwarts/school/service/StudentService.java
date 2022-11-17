@@ -1,6 +1,8 @@
 package ru.hogwarts.school.service;
 
 import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.exception.ElemNotFound;
@@ -22,6 +24,8 @@ public class StudentService {
 
     private final FacultyMapper facultyMapper;
 
+    Logger logger = LoggerFactory.getLogger(StudentService.class);
+
     public StudentService(StudentRepository studentRepository, StudentMapper studentMapper, FacultyMapper facultyMapper) {
         this.studentRepository = studentRepository;
         this.studentMapper = studentMapper;
@@ -29,52 +33,70 @@ public class StudentService {
     }
 
     public StudentRecord createStudent(StudentRecord studentRecord) {
+        logger.info("Was invoked method for create new Student");
+        logger.debug("Check before create new Student = {}", studentRecord);
         return studentMapper.toRecord(studentRepository.save(studentMapper.toEntity(studentRecord)));
     }
 
     public StudentRecord findStudentByID(long id) {
-        return studentMapper.toRecord(studentRepository.findById(id).orElseThrow(() -> new ElemNotFound("Нет элемента с id " + id)));
+        return studentMapper.toRecord(getByID(id));
     }
 
     public StudentRecord updateStudent(long id, StudentRecord studentRecord) {
         Student oldStudent = studentRepository.findById(id).orElseThrow(() -> new ElemNotFound("Нет элемента с id " + id));
         oldStudent.setName(studentRecord.getName());
         oldStudent.setAge(studentRecord.getAge());
+        logger.info("Was invoked method for updateStudent");
+        logger.debug("check before save {}", oldStudent);
         return studentMapper.toRecord(studentRepository.save(oldStudent));
     }
 
     public StudentRecord deleteStudentByID(long id) {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new ElemNotFound("Нет элемента с id " + id));
+        Student student = getByID(id);
+        logger.info("Was invoked method for delete student from db");
         studentRepository.delete(student);
         return studentMapper.toRecord(student);
     }
 
     public Collection<StudentRecord> getAllStudents() {
+        logger.info("Was invoked method for get all student from db");
         return studentMapper.toRecordList(studentRepository.findAll());
     }
 
     public Collection<StudentRecord> getAllStudentsWithAge(Integer age) {
+        logger.info("Was invoked method for get all student by age");
         return studentMapper.toRecordList(studentRepository.getStudentsByAge(age));
     }
 
     public Collection<StudentRecord> findStudentByAgeBetween(Integer from, Integer to) {
+        logger.info("Was invoked method for get all student by age between");
         return studentMapper.toRecordList(studentRepository.findStudentByAgeBetween(from, to));
     }
 
 
     public FacultyRecord findFacultyByStudentsId(long studentId) {
-        return facultyMapper.toRecord(studentRepository.findById(studentId).get().getFaculty());
+        logger.info("Was invoked method for get faculty from student by ID = {}", studentId);
+        return facultyMapper.toRecord(getByID(studentId).getFaculty());
     }
 
     public Integer findCountOfStudents() {
+        logger.info("Was invoked method for get count of students");
         return studentRepository.findCountOfStudents();
     }
 
     public Integer averageOfAge() {
+        logger.info("Was invoked method for get average of age");
         return studentRepository.averageOfAge();
     }
 
     public Collection<StudentRecord> fiveLastOfStudentsByID() {
+        logger.info("Was invoked method for get last five students by id");
         return studentMapper.toRecordList(studentRepository.fiveLastOfStudentsByID());
+    }
+
+    private Student getByID(long id) {
+        logger.info("Was invoked method for find by ID = {}", id);
+        logger.error("Elem with id = {}, not found. An exception occurred!", id);
+        return studentRepository.findById(id).orElseThrow(() -> new ElemNotFound("Нет элемента с id " + id));
     }
 }
