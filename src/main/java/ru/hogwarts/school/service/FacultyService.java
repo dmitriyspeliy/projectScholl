@@ -13,6 +13,8 @@ import ru.hogwarts.school.record.StudentRecord;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Stream;
 
 @Service
 @Getter
@@ -92,4 +94,17 @@ public class FacultyService {
         logger.error("Elem with id = {}, not found. An exception occurred!", id);
         return facultyRepository.findById(id).orElseThrow(() -> new ElemNotFound("Нет элемента с id " + id));
     }
+
+    public String longestName() {
+        logger.info("Was invoked method for get the longest name");
+        return facultyRepository.findAll()
+                .stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length)).get();
+    }
+
+    public Integer taskForSum() {
+        return Stream.iterate(1, a -> a + 1).parallel().limit(1_000_000).reduce(0, Integer::sum);
+    }
+
 }
