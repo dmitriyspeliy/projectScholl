@@ -2,14 +2,12 @@ package ru.hogwarts.school.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.record.FacultyRecord;
 import ru.hogwarts.school.record.StudentRecord;
 import ru.hogwarts.school.service.StudentService;
 
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("student")
@@ -41,8 +39,8 @@ public class StudentController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<StudentRecord> updateStudent(@RequestBody @Valid StudentRecord studentRecord,@PathVariable long id) {
-        return ResponseEntity.ok(studentService.updateStudent(id,studentRecord));
+    public ResponseEntity<StudentRecord> updateStudent(@RequestBody @Valid StudentRecord studentRecord, @PathVariable long id) {
+        return ResponseEntity.ok(studentService.updateStudent(id, studentRecord));
     }
 
     @DeleteMapping("{id}")
@@ -64,19 +62,31 @@ public class StudentController {
     }
 
     @GetMapping("/findCountOfStudents")
-    public ResponseEntity<Integer> findCountOfStudents(){
+    public ResponseEntity<Integer> findCountOfStudents() {
         return ResponseEntity.ok(studentService.findCountOfStudents());
     }
 
     @GetMapping("/averageOfAge")
-    public ResponseEntity<Integer> averageOfAge(){
+    public ResponseEntity<Integer> averageOfAge() {
         return ResponseEntity.ok(studentService.averageOfAge());
     }
 
     @GetMapping("/fiveLastOfStudentsByID")
-    public ResponseEntity<Collection<StudentRecord>> fiveLastOfStudentsByID(){
+    public ResponseEntity<Collection<StudentRecord>> fiveLastOfStudentsByID() {
         return ResponseEntity.ok(studentService.fiveLastOfStudentsByID());
     }
+
+    @GetMapping("/sortedNameStudStartWithA")
+    public ResponseEntity<Collection<String>> sortedNameStudStartWithA() {
+        return ResponseEntity.ok(studentService.sortedNameStudStartWithA());
+    }
+
+    @GetMapping("/getAverageAgeOfStudents")
+    public ResponseEntity<Double> getAverageAgeOfStudents() {
+        return ResponseEntity.ok(studentService.getAverageAgeOfStudents());
+    }
+
+
 
 
 }
