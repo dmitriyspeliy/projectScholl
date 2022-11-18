@@ -12,7 +12,9 @@ import ru.hogwarts.school.record.FacultyRecord;
 import ru.hogwarts.school.record.StudentRecord;
 import ru.hogwarts.school.repository.StudentRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -118,5 +120,51 @@ public class StudentService {
         logger.info("Was invoked method for find by ID = {}", id);
         logger.error("Elem with id = {}, not found. An exception occurred!", id);
         return studentRepository.findById(id).orElseThrow(() -> new ElemNotFound("Нет элемента с id " + id));
+    }
+
+    public void printNameOfStudent() {
+
+
+        printStudent(0);
+        printStudent(1);
+
+        new Thread(() -> {
+            printStudent(2);
+            printStudent(3);
+        }).start();
+
+
+        new Thread(() -> {
+            printStudent(4);
+            printStudent(5);
+        }).start();
+    }
+
+    private void printStudent(int elemIndex) {
+        List<Student> studentList = studentRepository.findAll();
+        System.out.println(studentList.get(elemIndex).getName());
+    }
+
+    public void printNameOfStudentWithSyn() {
+
+
+        printStudentWithSyn(0);
+        printStudentWithSyn(1);
+
+        new Thread(() -> {
+            printStudentWithSyn(2);
+            printStudentWithSyn(3);
+        }).start();
+
+
+        new Thread(() -> {
+            printStudentWithSyn(4);
+            printStudentWithSyn(5);
+        }).start();
+    }
+
+    private synchronized void printStudentWithSyn(int elemIndex) {
+        List<Student> studentList = studentRepository.findAll();
+        System.out.println(studentList.get(elemIndex).getName());
     }
 }
