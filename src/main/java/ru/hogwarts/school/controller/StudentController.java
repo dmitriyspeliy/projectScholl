@@ -87,6 +87,18 @@ public class StudentController {
     }
 
 
+    @GetMapping("printNameOfStudent")
+    public ResponseEntity<Void> printNameOfStudent() {
+        studentService.printNameOfStudent();
+        return null;
+    }
+
+    @GetMapping("printNameOfStudentWithSyn")
+    public ResponseEntity<Void> printNameOfStudentWithSyn() {
+        studentService.printNameOfStudentWithSyn();
+        return null;
+    }
+
 
 
 }
