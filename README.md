@@ -33,11 +33,11 @@ Cервис предоставляет следующие методы:
 ![UpdateStud](https://user-images.githubusercontent.com/102532626/203925771-ca16a65a-eb5c-4b9d-8dd5-8092e88318c7.png)
 
 
-https://user-images.githubusercontent.com/102532626/174462737-8175e243-7414-4eb2-8a0e-31b713eac2e4.mp4
 
 
 
-https://user-images.githubusercontent.com/102532626/174462740-9c10b62e-abe4-4c11-b012-796034e219f2.mp4
+https://user-images.githubusercontent.com/102532626/203927679-c64289af-42e5-43d3-8c84-db13d304015a.mp4
+
 
 
 
